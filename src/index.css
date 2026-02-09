@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme Variables */
+@layer base {
+  :root {
+    /* Light Theme */
+    --background: #ffffff;
+    --background-overlay: #ffffff;
+    --background-subtle: #f6f8fa;
+    --background-muted: #f6f8fa;
+    
+    --foreground: #1f2328;
+    --foreground-muted: #656d76;
+    --foreground-subtle: #6e7781;
+    --foreground-on-emphasis: #ffffff;
+    
+    --border: #d0d7de;
+    --border-muted: #d8dee4;
+    
+    --primary: #0969da;
+    --primary-emphasis: #0969da;
+    --primary-muted: rgba(84, 174, 255, 0.4);
+    --primary-subtle: #ddf4ff;
+    
+    --accent: #0969da;
+    --accent-foreground: #ffffff;
+    
+    --success: #1a7f37;
+    --success-foreground: #ffffff;
+    
+    --warning: #9a6700;
+    --warning-foreground: #ffffff;
+    
+    --destructive: #d1242f;
+    --destructive-foreground: #ffffff;
+    
+    --info: #8250df;
+    --info-foreground: #ffffff;
+    
+    --neutral-muted: #656d76;
+    --sponsors: #bf8700;
+    
+    --card: #f6f8fa;
+    --card-foreground: #1f2328;
+    
+    --popover: #ffffff;
+    --popover-foreground: #1f2328;
+    
+    --secondary: #f6f8fa;
+    --secondary-foreground: #1f2328;
+    
+    --muted: #f6f8fa;
+    --muted-foreground: #656d76;
+    
+    --input: #d0d7de;
+    --ring: #0969da;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Theme */
+    --background: #010409;
+    --background-overlay: #161b22;
+    --background-subtle: #0d1117;
+    --background-muted: #161b22;
+    
+    --foreground: #e6edf3;
+    --foreground-muted: #7d8590;
+    --foreground-subtle: #6e7681;
+    --foreground-on-emphasis: #ffffff;
+    
+    --border: #30363d;
+    --border-muted: #21262d;
+    
+    --primary: #2f81f7;
+    --primary-emphasis: #0e5cd1;
+    --primary-muted: rgba(56, 139, 253, 0.4);
+    --primary-subtle: #022158;
+    
+    --accent: #1f6feb;
+    --accent-foreground: #ffffff;
+    
+    --success: #3fb950;
+    --success-foreground: #ffffff;
+    
+    --warning: #d29922;
+    --warning-foreground: #ffffff;
+    
+    --destructive: #f85149;
+    --destructive-foreground: #ffffff;
+    
+    --info: #a5a5ff;
+    --info-foreground: #ffffff;
+    
+    --neutral-muted: #656d76;
+    --sponsors: #db61a2;
+    
+    --card: #161b22;
+    --card-foreground: #e6edf3;
+    
+    --popover: #161b22;
+    --popover-foreground: #e6edf3;
+    
+    --secondary: #161b22;
+    --secondary-foreground: #e6edf3;
+    
+    --muted: #161b22;
+    --muted-foreground: #7d8590;
+    
+    --input: #30363d;
+    --ring: #1f6feb;
+    --radius: 0.5rem;
+  }
+}
+
+/* Apply Theme Classes */
+@layer utilities {
+  .bg-canvas { background-color: var(--background); }
+  .bg-canvas-overlay { background-color: var(--background-overlay); }
+  .bg-canvas-subtle { background-color: var(--background-subtle); }
+  .bg-canvas-muted { background-color: var(--background-muted); }
+  .bg-canvas-default { background-color: var(--background); }
+  
+  .border-default { border-color: var(--border); }
+  .border-muted { border-color: var(--border-muted); }
+  
+  .text-default { color: var(--foreground); }
+  .text-muted { color: var(--foreground-muted); }
+  .text-subtle { color: var(--foreground-subtle); }
+  .text-on-emphasis { color: var(--foreground-on-emphasis); }
+  
+  .text-primary { color: var(--primary); }
+  .bg-primary-emphasis { background-color: var(--primary-emphasis); }
+  .bg-primary-muted { background-color: var(--primary-muted); }
+  .bg-primary-subtle { background-color: var(--primary-subtle); }
+  .border-primary-muted { border-color: var(--primary-muted); }
+  
+  .text-success { color: var(--success); }
+  .text-destructive { color: var(--destructive); }
+  .text-warning { color: var(--warning); }
+  .text-info { color: var(--info); }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+      monospace;
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-subtle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
+}
+
+/* Focus styles */
+input:focus, textarea:focus, button:focus {
+  outline: 2px solid var(--primary-emphasis);
+  outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: var(--primary-muted);
+  color: var(--foreground);
+}
+
+
+@layer components {
+  /* Highlight Styles */
+  .highlight-yellow {
+    background: linear-gradient(120deg, #fff59d 0%, #fff59d 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+  
+  .highlight-pink {
+    background: linear-gradient(120deg, #f8bbd9 0%, #f8bbd9 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+  
+  .highlight-green {
+    background: linear-gradient(120deg, #c8e6c9 0%, #c8e6c9 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+  
+  .highlight-blue {
+    background: linear-gradient(120deg, #bbdefb 0%, #bbdefb 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+}

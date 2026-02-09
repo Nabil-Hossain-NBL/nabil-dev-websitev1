@@ -1,0 +1,207 @@
+import React, { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { personalInfo } from '../data/data';
+import { useTheme } from '../contexts/ThemeContext';
+import Clock from './Clock';
+import {
+    User,
+    Briefcase,
+    FolderOpen,
+    Award,
+    Mail,
+    BookOpen,
+    Github,
+    Linkedin,
+    Instagram,
+    Facebook,
+    Twitter,
+    MapPin,
+    Phone,
+    ExternalLink,
+    Menu,
+    X,
+    Sun,
+    Moon
+} from 'lucide-react';
+
+const Sidebar = () => {
+    const location = useLocation();
+    const { theme, toggleTheme } = useTheme();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const navItems = [
+        { path: '/', label: 'About', icon: User },
+        { path: '/experience', label: 'Experience', icon: Briefcase },
+        { path: '/projects', label: 'Projects', icon: FolderOpen },
+        { path: '/skills', label: 'Skills', icon: Award },
+        { path: '/blog', label: 'Blog Posts', icon: BookOpen },
+        { path: '/contact', label: 'Contact', icon: Mail },
+    ];
+
+    const socialIcons = {
+        github: Github,
+        linkedin: Linkedin,
+        instagram: Instagram,
+        facebook: Facebook,
+        twitter: Twitter,
+    };
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    return (
+        <>
+            {/* Mobile Menu Button */}
+            <nav className="fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-5 py-3 bg-canvas/10 backdrop-blur-xl shadow-sm border-b border-blue-400/50 dark:border-blue-800/50 lg:hidden">
+                <h1 className="text-2xl font-bold text-default">
+                    &lt; <span className="text-primary">dev</span>folio /&gt;
+                </h1>
+                <div className="flex items-center gap-2">
+                    {/* Clock - Mobile Only */}
+                    <Clock showIcon={false} className="mr-1" />
+
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 transition-colors duration-200 rounded-lg bg-canvas-subtle hover:bg-canvas-muted"
+                        title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                    >
+                        {theme === 'light' ? (
+                            <Moon size={20} className="text-default" />
+                        ) : (
+                            <Sun size={20} className="text-default" />
+                        )}
+                    </button>
+
+                    <button
+                        onClick={toggleMobileMenu}
+                        className="p-2 transition-colors rounded-lg hover:bg-canvas-subtle"
+                        aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                        aria-expanded={isMobileMenuOpen}
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
+            </nav>
+
+            {/* Sidebar */}
+            <aside
+                className={`
+                fixed inset-y-0 left-0 z-50 lg:relative lg:z-auto w-[65%] lg:w-full transform transition-transform duration-300 ease-in-out lg:transform-none 
+                ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} 
+                bg-canvas-overlay lg:bg-transparent lg:sticky lg:top-0 lg:h-screen overflow-y-auto border-r border-default lg:border-r-0
+            `}
+            >
+                <div className="p-4 lg:p-6">
+                    {/* Profile Section */}
+                    <section className="mb-6 text-center">
+                        <div className="w-28 h-28 mx-auto mb-4 overflow-hidden border-4 rounded-full lg:w-32 lg:h-32 border-default bg-canvas-subtle">
+                            <img
+                                src="https://avatars.githubusercontent.com/u/80216808?v=4"
+                                alt={personalInfo.name}
+                                loading="lazy"
+                                decoding="async"
+                                className="object-cover w-full h-full"
+                            />
+                        </div>
+                        <h1 className="mb-2 text-xl font-bold lg:text-2xl text-default">
+                            {personalInfo.name}
+                        </h1>
+                        <p className="text-sm text-muted lg:text-sm">
+                            Software Engineer
+                        </p>
+                    </section>
+
+                    {/* Contact Info */}
+                    <address className="mb-6 space-y-3 lg:mb-6 lg:space-y-3 not-italic">
+                        <div className="flex items-center text-sm lg:text-sm text-muted">
+                            <MapPin size={18} className="flex-shrink-0 mr-3 text-primary" />
+                            <span className="truncate">{personalInfo.location}</span>
+                        </div>
+                        <div className="flex items-center text-sm lg:text-sm text-muted">
+                            <Phone size={18} className="flex-shrink-0 mr-3 text-primary" />
+                            <span>{personalInfo.phone}</span>
+                        </div>
+                        {/* <div className="flex items-center text-sm lg:text-sm text-muted">
+                            <ExternalLink size={18} className="flex-shrink-0 mr-3 text-primary" />
+                            <a
+                                href={`${personalInfo.socialLinks.github}/`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="truncate transition-colors hover:text-primary"
+                            >
+                                View Source Code
+                            </a>
+                        </div> */}
+                    </address>
+
+                    {/* Navigation */}
+                    <nav className="mb-6">
+                        <ul className="space-y-2">
+                            {navItems.map((item) => {
+                                const Icon = item.icon;
+                                const isActive = location.pathname === item.path;
+
+                                return (
+                                    <li key={item.path}>
+                                        <NavLink
+                                            to={item.path}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className={`
+                                                flex items-center px-4 py-3 rounded-lg transition-colors text-sm
+                                                ${isActive
+                                                    ? 'bg-primary-emphasis text-white'
+                                                    : 'text-default hover:bg-canvas-subtle hover:text-primary'
+                                                }
+                                            `}
+                                            aria-current={isActive ? 'page' : undefined}
+                                        >
+                                            <Icon size={20} className="flex-shrink-0 mr-3" />
+                                            <span className="text-sm font-medium">{item.label}</span>
+                                        </NavLink>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </nav>
+
+                    {/* Social Links */}
+                    <nav className="pt-4 border-t border-default">
+                        <p className="mb-4 text-sm font-medium text-default">Connect with me</p>
+                        <ul className="grid grid-cols-3 gap-3 lg:flex lg:flex-wrap lg:gap-3">
+                            {Object.entries(personalInfo.socialLinks).slice(0, 5).map(([platform, url]) => {
+                                const Icon = socialIcons[platform];
+                                return (
+                                    <li key={platform}>
+                                        <a
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex flex-col items-center p-3 transition-all duration-200 transform border rounded-lg lg:p-2 bg-canvas-subtle hover:bg-primary-emphasis hover:text-white hover:scale-105 border-default"
+                                            title={platform}
+                                            aria-label={`Link to my ${platform} profile`}
+                                        >
+                                            <Icon size={20} className="mb-1" />
+                                            <span className="text-xs capitalize lg:hidden">{platform.slice(0, 3)}</span>
+                                        </a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            {/* Mobile Overlay */}
+            {isMobileMenuOpen && (
+                <div
+                    className="fixed inset-0 z-40 transition-opacity duration-300 bg-black/60 backdrop-blur-sm lg:hidden"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                />
+            )}
+        </>
+    );
+};
+
+export default Sidebar;

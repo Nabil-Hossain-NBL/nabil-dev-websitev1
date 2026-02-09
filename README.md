@@ -39,6 +39,20 @@ This is my personal corner of the internet! I built this portfolio to showcase m
 Want to run this project locally? Here's how:
 
 
+1.  **Clone the repo:**
+    ```sh
+    git clone https://github.com/Nabil-Hossain-NBL/nabil-dev-websitev1.git
+    ```
+2.  **Install the dependencies:**
+    ```sh
+    npm install
+    ```
+3.  **Start the development server:**
+    ```sh
+    npm run dev
+    ```
+    Now you can open your browser and visit `http://localhost:3000` to see it in action!
+    
 ## 🚀 Deployment
 
 I've set this up to deploy to GitHub Pages. The `deploy` script in the `package.json` file takes care of everything.
@@ -56,3 +70,4 @@ I'm always open to connecting with other developers, so feel free to reach out!
 <p align="center"><strong>Thanks for stopping by! 😊</strong></p>
 
 ---
+
